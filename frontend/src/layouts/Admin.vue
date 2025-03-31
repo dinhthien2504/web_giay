@@ -2,9 +2,7 @@
     <header>
         <TheHeaderAdmin></TheHeaderAdmin>
     </header>
-    <div class="container">
-        <router-view></router-view>
-    </div>
+    <router-view></router-view>
 </template>
 <script>
 import TheHeaderAdmin from '../components/TheHeaderAdmin.vue';

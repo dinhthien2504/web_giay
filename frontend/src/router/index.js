@@ -9,6 +9,16 @@ const routes = [
                 path: '',
                 name: 'home',
                 component: () => import('../pages/client/home.vue')
+            },
+            {
+                path: 'dang-nhap',
+                name: 'login',
+                component: () => import('../pages/client/auth/login.vue')
+            },
+            {
+                path: 'dang-ky',
+                name: 'register',
+                component: () => import('../pages/client/auth/register.vue')
             }
         ]
     },

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop Giày</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f8f8;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            position: relative;
+        }
+        .auth-buttons {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+        }
+        .auth-buttons a {
+            background-color: white;
+            color: #333;
+            padding: 8px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-left: 10px;
+            font-size: 14px;
+        }
+        .auth-buttons a:hover {
+            background-color: #ddd;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+        .banner {
+            position: relative;
+            max-width: 100%;
+            overflow: hidden;
+            margin: 20px auto;
+        }
+        .banner img {
+            width: 100%;
+            display: none;
+        }
+        .banner img.active {
+            display: block;
+        }
+        .product-section {
+            text-align: center;
+        }
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            justify-content: center;
+            padding: 20px;
+        }
+        .product {
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+        }
+        .product:hover {
+            transform: scale(1.1);
+        }
+        .product img {
+            width: 50%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .product .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .product button {
+            background-color: #333;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .product button:hover {
+            background-color: #555;
+        }
+        .banner-buttons {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+        .banner-buttons button {
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+        }
+        .banner-buttons button:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Shop Giày Thời Trang</h1>
+        <div class="auth-buttons">
+            <a href="#">Đăng nhập</a>
+            <a href="#">Đăng ký</a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Trang chủ</a></li>
+                <li><a href="#">Sản phẩm</a></li>
+                <li><a href="#">Liên hệ</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <section class="banner">
+        <img src="img/banner1.jpg" class="active" alt="Banner 1">
+        <img src="img/banner2.jpg" alt="Banner 2">
+        <img src="img/banner3.jpg" alt="Banner 3">
+        <div class="banner-buttons">
+            <button onclick="prevSlide()">&#10094;</button>
+            <button onclick="nextSlide()">&#10095;</button>
+        </div>
+    </section>
+    
+    <section class="product-section">
+        <h2>Sản phẩm nổi bật</h2>
+        <div class="product-list">
+            <script>
+                const productNames = ["Giày Nike", "Giày Sneaker", "Giày Luis Vuitton", "Giày Adidas", "Giày Converse", "Giày Puma", "Giày Balenciaga", "Giày Vans", "Giày Gucci"];
+                for (let i = 1; i <= 9; i++) {
+                    document.write(`
+                        <div class="product">
+                            <img src="img/shoe${i}.jpg" alt="${productNames[i - 1]}">
+                            <h3>${productNames[i - 1]}</h3>
+                            <p>Giá: ${Math.floor(Math.random() * (3000 - 1000 + 1) + 1000)}.000đ</p>
+                            <div class="buttons">
+                                <button>Mua ngay</button>
+                                <button>Thêm vào giỏ</button>
+                            </div>
+                        </div>
+                    `);
+                }
+            </script>
+        </div>
+    </section>
+    
+    <footer>
+        <p>&copy; 2025 Shop Giày. All rights reserved.</p>
+    </footer>
+</body>
+</html>

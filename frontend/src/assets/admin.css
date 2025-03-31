@@ -1,0 +1,27 @@
+/* Login Admin */
+.container__form-login {
+    background-color: #222;
+    color: white;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.container-box {
+    width: 400px;
+    margin: auto;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+}
+
+.hidden {
+    display: none;
+}
+
+.form-title {
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 20px;
+}
