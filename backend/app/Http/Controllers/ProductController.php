@@ -12,7 +12,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $product = Product::get();
+        return response()->json([$product]);
     }
     /**
      * Show the form for creating a new resource.
