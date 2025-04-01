@@ -8521,7 +8521,6 @@
         "fakerphp/faker",
         "filp/whoops",
         "hamcrest/hamcrest-php",
-        "laravel/breeze",
         "laravel/pail",
         "laravel/pint",
         "laravel/sail",
