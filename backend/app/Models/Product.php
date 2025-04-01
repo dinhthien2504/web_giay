@@ -14,9 +14,5 @@ class Product extends Model
         'image',
         'category_id',
     ];
-
-    protected $primaryKey = 'id';
-    protected $incrementing = true;
-    protected $keytype = 'int';
     protected $timestamps = false;
 }

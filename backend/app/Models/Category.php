@@ -11,8 +11,5 @@ class Category extends Model
         'description',
     ];
 
-    protected $primaryKey = 'id';
-    protected $incrementing = true;
-    protected $keytype = 'int';
     protected $timestamps = false;
 }
