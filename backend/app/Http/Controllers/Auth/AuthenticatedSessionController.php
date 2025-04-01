@@ -7,23 +7,33 @@ use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-
 class AuthenticatedSessionController extends Controller
 {
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): Response
+    public function store(LoginRequest $request)
     {
-        $request->authenticate();
+        try {
+            $request->authenticate();
+            // Lấy user sau khi xác thực
+            $user = $request->user();
 
-        $request->session()->regenerate();
+            // Xóa token cũ nếu có (tránh bị trùng token)
+            $user->tokens()->delete();
 
-        return response()->json([
-            'message' => 'Đăng nhập thành công!',
-            'user' => $request->user(),
-            'role' => $request->user()->role,
-        ]);
+            // Tạo token mới
+            $token = $user->createToken('auth_token')->plainTextToken;
+            return response()->json([
+                'message' => 'Đăng nhập thành công!',
+                'user' => $user,
+                'token' => $token,
+                'role' => $request->user()->role,
+            ]);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 401);
+        }
+
     }
 
     /**

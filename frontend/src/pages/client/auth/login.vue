@@ -5,6 +5,7 @@
                 <img src="/img/logo.jpg" class="brand-logo mb-3" alt="Logo ShoeStore">
             </div>
             <h2 class="mb-3 text-uppercase text-primary text-center">Đăng Nhập</h2>
+            <p v-if="message" class="alert alert-danger">{{ message }}</p>
             <form @submit.prevent="submitLogin">
                 <div class="mb-3">
                     <input type="email" v-model="user.email" class="form-control" placeholder="Email">
@@ -14,8 +15,8 @@
                 </div>
                 <div class="mb-3">
                     <input type="password" v-model="user.password" class="form-control" placeholder="Mật khẩu">
-                    <p class="text-danger" v-if="errors.email">
-                        {{ Array.isArray(errors.email) ? errors.email[0] : errors.email }}
+                    <p class="text-danger" v-if="errors.password">
+                        {{ Array.isArray(errors.password) ? errors.password[0] : errors.password }}
                     </p>
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Đăng Nhập</button>
@@ -35,11 +36,12 @@
 import { ref } from 'vue';
 import axios from 'axios';
 import { urlApi } from '../../../components/store';
+import { useRouter } from 'vue-router';
 export default {
     setup() {
+        const router = useRouter();
         const message = ref('');
         const errors = ref({});
-        const loggedInUser = ref(null);
         const user = ref({
             email: '',
             password: ''
@@ -68,10 +70,14 @@ export default {
         const login = async (user) => {
             try {
                 const response = await axios.post(`${urlApi}/login`, user);
-                loggedInUser.value = response.data.user;
-                // Reset form
-                user.email = '';
-                user.password = '';
+                if (response.status == 200) {
+                    console.log("Đăng nhập thành công");
+                    // Lưu thông tin người dùng và token vào localStorage
+                    localStorage.setItem('auth_token', response.data.token);  // Lưu token
+                    localStorage.setItem('user', JSON.stringify(response.data.user));  // Lưu thông tin người dùng
+                    const role = response.data.role == 0 ? 'home' : 'admin-dashboard';
+                    router.push({ name: role });
+                }
             } catch (error) {
                 if (error.response) {
                     errors.value = error.response.data.errors || {};
@@ -80,7 +86,7 @@ export default {
             }
         };
         return {
-            submitLogin, user, errors, message, loggedInUser
+            submitLogin, user, errors, message
         }
     }
 }

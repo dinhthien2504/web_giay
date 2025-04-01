@@ -28,7 +28,7 @@ class LoginRequest extends FormRequest
     {
         return [
             'email' => ['required', 'email'],
-            'password' => ['required'],
+            'password' => 'required',
         ];
     }
 
@@ -39,13 +39,25 @@ class LoginRequest extends FormRequest
      */
     public function authenticate(): void
     {
-        $this->ensureIsNotRateLimited();
+        $user = \App\Models\User::where('email', $this->input('email'))->first();
+
+        if (!$user) {
+            throw ValidationException::withMessages([
+                'email' => 'Email này chưa được đăng ký.',
+            ]);
+        }
+
+        if (RateLimiter::tooManyAttempts($this->throttleKey(), 20)) {
+            throw ValidationException::withMessages([
+                'email' => 'Bạn đã nhập sai quá nhiều lần. Hãy thử lại sau 15 phút.',
+            ]);
+        }
 
         if (!Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
-            RateLimiter::hit($this->throttleKey());
+            RateLimiter::hit($this->throttleKey(), 900); // 900 giây = 15 phút
 
             throw ValidationException::withMessages([
-                'email' => __('auth.failed'),
+                'password' => 'Mật khẩu không đúng.',
             ]);
         }
 

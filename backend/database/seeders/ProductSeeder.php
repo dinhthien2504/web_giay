@@ -23,7 +23,7 @@ class ProductSeeder extends Seeder
                 'description' => 'Mô tả giày 1',
                 'price' => 199000,
                 'stock' => 50,
-                'images' => 'shoe1.jpg'
+                'image' => 'shoe1.jpg'
             ],
             [
                 'category_id' => $categories->random(),
@@ -31,7 +31,7 @@ class ProductSeeder extends Seeder
                 'description' => 'Mô tả giày 2',
                 'price' => 199000,
                 'stock' => 50,
-                'images' => 'shoe2.jpg'
+                'image' => 'shoe2.jpg'
             ],
             [
                 'category_id' => $categories->random(),
@@ -39,7 +39,7 @@ class ProductSeeder extends Seeder
                 'description' => 'Mô tả giày 3',
                 'price' => 199000,
                 'stock' => 50,
-                'images' => 'shoe3.jpg'
+                'image' => 'shoe3.jpg'
             ],
             [
                 'category_id' => $categories->random(),
@@ -47,7 +47,7 @@ class ProductSeeder extends Seeder
                 'description' => 'Mô tả giày 4',
                 'price' => 199000,
                 'stock' => 50,
-                'images' => 'shoe4.jpg'
+                'image' => 'shoe4.jpg'
             ]
         ]);
     }

@@ -11,5 +11,4 @@ class Category extends Model
         'description',
     ];
 
-    protected $timestamps = false;
 }

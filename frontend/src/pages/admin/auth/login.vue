@@ -29,8 +29,10 @@
 import { ref } from 'vue';
 import axios from 'axios';
 import { urlApi } from '../../../components/store';
+import { useRouter } from 'vue-router';
 export default {
     setup() {
+        const router = useRouter();
         const message = ref('');
         const errors = ref({});
         const loggedInUser = ref(null);
@@ -62,10 +64,14 @@ export default {
         const login = async (user) => {
             try {
                 const response = await axios.post(`${urlApi}/login`, user);
-                loggedInUser.value = response.data.user;
-                // Reset form
-                user.email = '';
-                user.password = '';
+                if (response.status == 200) {
+                    console.log("Đăng nhập thành công");
+                    // Lưu thông tin người dùng và token vào localStorage
+                    localStorage.setItem('auth_token', response.data.token);  // Lưu token
+                    localStorage.setItem('user', JSON.stringify(response.data.user));  // Lưu thông tin người dùng
+                    const role = response.data.role == 0 ? 'home' : 'admin-dashboard';
+                    router.push({ name: role });
+                }
             } catch (error) {
                 if (error.response) {
                     errors.value = error.response.data.errors || {};
