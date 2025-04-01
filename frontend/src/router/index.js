@@ -5,6 +5,16 @@ const routes = [
         path: '/',
         component: () => import('../layouts/Client.vue'),
         children: [
+            // route đăng nhập cho admin
+            {
+                path: 'login-admin',
+                name: 'admin-login',
+                component: () => import('../pages/admin/auth/login.vue'),
+                meta: {
+                    hideHeader: true,
+                    hideFooter: true
+                }
+            },
             {
                 path: '',
                 name: 'home',
@@ -19,6 +29,11 @@ const routes = [
                 path: 'dang-ky',
                 name: 'register',
                 component: () => import('../pages/client/auth/register.vue')
+            },
+            {
+                path: 'quen-mk',
+                name: 'forgot-pass',
+                component: () => import('../pages/client/auth/forgot-pass.vue')
             }
         ]
     },
