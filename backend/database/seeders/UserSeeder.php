@@ -11,12 +11,12 @@ class UserSeeder extends Seeder
             [
                 'name' => 'Tài khoản 1',
                 'email' => 'taikhoan1@gmail.com',
-                'password' => '12345'
+                'password' => '123456'
             ],
             [
                 'name' => 'Tài khoản 2',
                 'email' => 'taikhoan2@gmail.com',
-                'password' => '12345'
+                'password' => '123456'
             ]
         ]);
     }

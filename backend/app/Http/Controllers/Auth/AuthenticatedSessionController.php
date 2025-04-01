@@ -19,7 +19,11 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return response()->noContent();
+        return response()->json([
+            'message' => 'Đăng nhập thành công!',
+            'user' => $request->user(),
+            'role' => $request->user()->role,
+        ]);
     }
 
     /**

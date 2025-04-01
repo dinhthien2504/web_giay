@@ -31,9 +31,9 @@ const routes = [
                 component: () => import('../pages/client/auth/register.vue')
             },
             {
-                path: 'quen-mk',
+                path: 'doi-mk',
                 name: 'forgot-pass',
-                component: () => import('../pages/client/auth/forgot-pass.vue')
+                component: () => import('../pages/client/auth/change-pass.vue')
             }
         ]
     },

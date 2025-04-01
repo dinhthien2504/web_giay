@@ -32,10 +32,10 @@
     </div>
 </template>
 
-<script>
+<script>    
 import { ref } from 'vue';
 import axios from 'axios';
-// import { urlApiUsers } from '../../../components/store';
+import { urlApi } from '../../../components/store';
 export default {
     setup() {
         const errors = ref({});
@@ -79,10 +79,10 @@ export default {
         const register = async (user) => {
             try {
                 errors.value = {}; // Reset lỗi cũ
-                const response = await axios.post(urlApiUsers, user);
+                const response = await axios.post(`${urlApi}/register`, user);
 
                 // Nếu đăng ký thành công
-                message.value = response.data.message;
+                message.value = 'Tạo tài khoản thành công';
                 user.name = '';
                 user.email = '';
                 user.password = '';

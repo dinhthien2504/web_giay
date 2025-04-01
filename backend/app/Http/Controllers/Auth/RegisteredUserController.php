@@ -36,6 +36,6 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return response()->noContent();
+        return response()->json(['message' => 'Tạo tài khoản thành công!', 'user' => $user, 'role' => 0], 201);
     }
 }

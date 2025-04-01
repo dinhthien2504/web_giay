@@ -8,6 +8,11 @@ class Category extends Model
 {
     protected $fillable = [
         'name',
-        'description'
+        'description',
     ];
+
+    protected $primaryKey = 'id';
+    protected $incrementing = true;
+    protected $keytype = 'int';
+    protected $timestamps = false;
 }

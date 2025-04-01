@@ -20,7 +20,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Đăng Nhập</button>
                 <div class="mt-3 text-center">
-                    <router-link to="/quen-mk" class="text-primary">Quên mật khẩu?</router-link>
+                    <router-link to="/doi-mk" class="text-primary">Đổi mật khẩu?</router-link>
                 </div>
                 <div class="mt-2 text-center">
                     <span>Chưa có tài khoản? <router-link to="/dang-ky" class="text-primary">Đăng
@@ -34,7 +34,7 @@
 <script>
 import { ref } from 'vue';
 import axios from 'axios';
-import { urlApiUsers } from '../../../components/store';
+import { urlApi } from '../../../components/store';
 export default {
     setup() {
         const message = ref('');
@@ -67,7 +67,7 @@ export default {
         //Viết hàm kiểm tra đăng nhập trên server
         const login = async (user) => {
             try {
-                const response = await axios.post(`${urlApiUsers}/login`, user);
+                const response = await axios.post(`${urlApi}/login`, user);
                 loggedInUser.value = response.data.user;
                 // Reset form
                 user.email = '';

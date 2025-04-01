@@ -9,14 +9,16 @@
                     <th scope="col">#</th>
                     <th scope="col">Tên</th>
                     <th scope="col">Email</th>
+                    <th scope="col">Vai Trò</th>
                     <th scope="col">Thao Tác</th>
                 </tr>
             </thead>
             <tbody class="table-group-divider">
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Tên khách hàng</td>
-                    <td>diachi@gmail.com</td>
+                <tr v-for="(user, index) in users">
+                    <th scope="row">{{ index + 1 }}</th>
+                    <td>{{ user.name }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.role == 0 ? 'Khách hàng' : 'Quản trị' }}</td>
                     <td>
                         <a class="btn btn-warning" href="">Sửa</a>
                         <a class="btn btn-danger ms-2" href="">Khóa</a>
@@ -63,3 +65,42 @@
         </div>
     </div>
 </template>
+
+<script>
+import axios from 'axios';
+import { onMounted, ref } from 'vue';
+import { urlApi } from '../../../components/store';
+export default {
+    setup() {
+        const users = ref([
+            {
+                id: '1',
+                name: 'Tài khoản 1',
+                email: 'taikhoan1@gmail.com',
+                role: 1
+            },
+            {
+                id: '2',
+                name: 'Tài khoản 2',
+                email: 'taikhoan2@gmail.com',
+                role: 0
+            }
+        ]);
+        const getUsers = async () => {
+            try {
+                const response = await axios.get(`${urlApi}/users`);
+                users.value = response.data;
+                console.log("Lấy dữ liệu thành công!", users.value);
+            } catch (error) {
+                console.error("Lỗi khi lấy dữ liệu:", error);
+            }
+        };
+        onMounted(() => {
+            getUsers();
+        })
+        return {
+            users
+        }
+    }
+}
+</script>

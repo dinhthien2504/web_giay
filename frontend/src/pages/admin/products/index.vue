@@ -17,19 +17,20 @@
                 </tr>
             </thead>
             <tbody class="table-group-divider">
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Tên sản phẩm</td>
-                    <td>Danh mục hihi</td>
-                    <td>100.000đ</td>
-                    <td>100</td>
+                <tr v-for="(pro, index) in products">
+                    <th scope="row">{{ index }}</th>
+                    <td>{{ pro.name }}</td>
+                    <td>{{ pro.cateogory_id }}</td>
+                    <td>{{ pro.price.toLocaleString() }}đ</td>
+                    <td>{{ pro.stock }}</td>
                     <td>
-                        <img src="/img/shoe1.jpg" alt="Hình ảnh" style="width: 40px; height: 40px; object-fit: cover;">
+                        <img :src="`/img/${pro.image}`" alt="Hình ảnh"
+                            style="width: 40px; height: 40px; object-fit: cover;">
                     </td>
-                    <td>Mô tả</td>
+                    <td>{{ pro.description }}</td>
                     <td>
-                        <a class="btn btn-warning" href="">Sửa</a>
-                        <a class="btn btn-danger ms-2" href="">Khóa</a>
+                        <button type="button" class="btn btn-warning" href="">Sửa</button>
+                        <button type="button" class="btn btn-danger ms-2" href="">Xóa</button>
                     </td>
                 </tr>
             </tbody>
@@ -86,3 +87,47 @@
         </div>
     </div>
 </template>
+<script>
+import axios from 'axios';
+import { onMounted, ref } from 'vue';
+import { urlApi } from '../../../components/store';
+export default {
+    setup() {
+        const products = ref([
+            {
+                id: '1',
+                name: 'Sản phẩm 1',
+                cateogory_id: 1,
+                price: 100000,
+                stock: 100,
+                image: 'shoe1.jpg',
+                description: 'Mô tả sản phẩm'
+            },
+            {
+                id: '2',
+                name: 'Sản phẩm 2',
+                cateogory_id: 1,
+                price: 200000,
+                stock: 10,
+                image: 'shoe2.jpg',
+                description: 'Mô tả sản phẩm 2'
+            }
+        ]);
+        const getPros = async () => {
+            try {
+                const response = await axios.get(`${urlApi}/products`);
+                products.value = response.data;
+                console.log("Lấy dữ liệu thành công!", products.value);
+            } catch (error) {
+                console.error("Lỗi khi lấy dữ liệu:", error);
+            }
+        };
+        onMounted(() => {
+            getPros();
+        })
+        return {
+            products
+        }
+    }
+}
+</script>
