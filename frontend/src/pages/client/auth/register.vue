@@ -94,7 +94,7 @@
                     user.password = '';
 
                 } catch (error) {
-                    console.log(error);
+                    message.value = error.response.data.message;
                     
                     if (error.response && error.response.data.errors) {
                         errors.value = error.response.data.errors;
