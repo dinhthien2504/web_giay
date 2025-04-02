@@ -1,69 +1,39 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\UpdateUserRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function changePassword(Request $request)
     {
-        $users = User::all();
-        return response()->json([
-            'users' => $users
+        // Xác thực dữ liệu đầu vào
+        $request->validate([
+            'email' => 'required|email|exists:users,email',
+            'old_password' => 'required',
+            'new_password' => 'required|min:8|confirmed',
         ]);
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+        // Tìm user theo email
+        $user = User::where('email', $request->email)->first();
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreUserRequest $request)
-    {
-        //
-    }
+        // Kiểm tra xem user có tồn tại không
+        if (!$user) {
+            return response()->json(['message' => 'Tài khoản không tồn tại!'], 404);
+        }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(User $user)
-    {
-        //
-    }
+        // Kiểm tra mật khẩu cũ có đúng không
+        if (!Hash::check($request->old_password, $user->password)) {
+            return response()->json(['message' => 'Mật khẩu cũ không đúng!'], 400);
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(User $user)
-    {
-        //
-    }
+        // Cập nhật mật khẩu mới
+        $user->password = Hash::make($request->new_password);
+        $user->save();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateUserRequest $request, User $user)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(User $user)
-    {
-        //
+        return response()->json(['message' => 'Đổi mật khẩu thành công!'], 200);
     }
 }
