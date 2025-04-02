@@ -1,5 +1,5 @@
 <template>
-    <div class="container-form">
+    <div v-if="!isLogin" class="container-form">
         <div class="form__container">
             <div class="text-center">
                 <img src="/img/logo.jpg" class="brand-logo mb-3" alt="Logo ShoeStore">
@@ -30,64 +30,71 @@
             </form>
         </div>
     </div>
+    <div v-else class="bg-light d-flex align-items-center justify-content-center text-center" style="height: 85vh;">
+        <p class="alert alert-success">Xin chào: {{ isLogin.name }}
+        <p>
+            Chúc bạn trải nghiệm trang web vui vẻ nhé!
+        </p>
+        </p>
+    </div>
 </template>
 
 <script>
-import { ref } from 'vue';
+// import { inject } from 'vue';
 import axios from 'axios';
 import { urlApi } from '../../../components/store';
-import { useRouter } from 'vue-router';
+// import { useRouter } from 'vue-router';
+
 export default {
-    setup() {
-        const router = useRouter();
-        const message = ref('');
-        const errors = ref({});
-        const user = ref({
-            email: '',
-            password: ''
-        });
-        const submitLogin = () => {
-            //Check dữ liệu phí frontend
-            errors.value = {};
-            message.value = '';
-            // Kiểm tra email
-            if (!user.value.email.trim()) {
-                errors.value.email = 'Trường địa chỉ email không được để trống.';
-            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(user.value.email)) {
-                errors.value.email = 'Email bạn nhập vào không hợp lệ.';
+    emits: ['success-login'], // Khai báo sự kiện emit
+    data() {
+        return {
+            message: '',
+            errors: {},
+            user: {
+                email: '',
+                password: ''
+            },
+            isLogin: JSON.parse(localStorage.getItem('user')) || null
+        };
+    },
+    methods: {
+        async submitLogin() {
+            this.errors = {};
+            this.message = '';
+
+            if (!this.user.email.trim()) {
+                this.errors.email = 'Trường địa chỉ email không được để trống.';
+            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.user.email)) {
+                this.errors.email = 'Email bạn nhập vào không hợp lệ.';
             }
 
-            if (!user.value.password.trim()) {
-                errors.value.password = 'Trường mật khẩu không được để trống.';
+            if (!this.user.password.trim()) {
+                this.errors.password = 'Trường mật khẩu không được để trống.';
             }
-            if (Object.keys(errors.value).length > 0) {
+
+            if (Object.keys(this.errors).length > 0) {
                 return;
             }
-            //Gọi api để check đăng nhập
-            login(user.value);
-        }
-        //Viết hàm kiểm tra đăng nhập trên server
-        const login = async (user) => {
+
             try {
-                const response = await axios.post(`${urlApi}/login`, user);
-                if (response.status == 200) {
-                    console.log("Đăng nhập thành công");
-                    // Lưu thông tin người dùng và token vào localStorage
-                    localStorage.setItem('auth_token', response.data.token);  // Lưu token
-                    localStorage.setItem('user', JSON.stringify(response.data.user));  // Lưu thông tin người dùng
-                    const role = response.data.role == 0 ? 'home' : 'admin-dashboard';
-                    router.push({ name: role });
+                const response = await axios.post(`${urlApi}/login`, this.user);
+                if (response.status === 200) {
+                    localStorage.setItem('auth_token', response.data.token);
+                    localStorage.setItem('user', JSON.stringify(response.data.user));
+
+                    const role = response.data.role === 0 ? 'home' : 'admin-dashboard';
+                    this.$router.push({ name: role });
+
+                    this.$emit('success-login', response.data.user);
                 }
             } catch (error) {
                 if (error.response) {
-                    errors.value = error.response.data.errors || {};
-                    message.value = error.response.data.message;
+                    this.errors = error.response.data.errors || {};
+                    this.message = error.response.data.message;
                 }
             }
-        };
-        return {
-            submitLogin, user, errors, message
         }
     }
-}
+};
 </script>

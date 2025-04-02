@@ -10,7 +10,11 @@ class CategorySeeder extends Seeder
         Category::insert([
             [
                 'name' => 'Giày nam',
-                'description' => 'Mô tả giày nam'
+                'description' => 'Mô tả danh mục giày nam'
+            ],
+            [
+                'name' => 'Giày nữ',
+                'description' => 'Mô tả danh mục giày nữ'
             ]
         ]);
     }

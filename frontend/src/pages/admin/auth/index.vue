@@ -72,24 +72,11 @@ import { onMounted, ref } from 'vue';
 import { urlApi } from '../../../components/store';
 export default {
     setup() {
-        const users = ref([
-            {
-                id: '1',
-                name: 'Tài khoản 1',
-                email: 'taikhoan1@gmail.com',
-                role: 1
-            },
-            {
-                id: '2',
-                name: 'Tài khoản 2',
-                email: 'taikhoan2@gmail.com',
-                role: 0
-            }
-        ]);
+        const users = ref('');
         const getUsers = async () => {
             try {
                 const response = await axios.get(`${urlApi}/users`);
-                users.value = response.data;
+                users.value = response.data.users;
                 console.log("Lấy dữ liệu thành công!", users.value);
             } catch (error) {
                 console.error("Lỗi khi lấy dữ liệu:", error);

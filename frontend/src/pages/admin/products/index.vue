@@ -10,6 +10,7 @@
                     <th scope="col">Tên</th>
                     <th scope="col">Danh Mục</th>
                     <th scope="col">Giá</th>
+                    <th scope="col">Lượt Bán</th>
                     <th scope="col">Số Lượng</th>
                     <th scope="col">Hình Ảnh</th>
                     <th scope="col">Mô Tả</th>
@@ -18,10 +19,11 @@
             </thead>
             <tbody class="table-group-divider">
                 <tr v-for="(pro, index) in products">
-                    <th scope="row">{{ index }}</th>
+                    <th scope="row">{{ index + 1 }}</th>
                     <td>{{ pro.name }}</td>
                     <td>{{ pro.cateogory_id }}</td>
-                    <td>{{ pro.price.toLocaleString() }}đ</td>
+                    <td>{{ (pro.price).toLocaleString() }}đ</td>
+                    <td>{{ pro.sell }}</td>
                     <td>{{ pro.stock }}</td>
                     <td>
                         <img :src="`/img/${pro.image}`" alt="Hình ảnh"
@@ -93,30 +95,11 @@ import { onMounted, ref } from 'vue';
 import { urlApi } from '../../../components/store';
 export default {
     setup() {
-        const products = ref([
-            {
-                id: '1',
-                name: 'Sản phẩm 1',
-                cateogory_id: 1,
-                price: 100000,
-                stock: 100,
-                image: 'shoe1.jpg',
-                description: 'Mô tả sản phẩm'
-            },
-            {
-                id: '2',
-                name: 'Sản phẩm 2',
-                cateogory_id: 1,
-                price: 200000,
-                stock: 10,
-                image: 'shoe2.jpg',
-                description: 'Mô tả sản phẩm 2'
-            }
-        ]);
+        const products = ref();
         const getPros = async () => {
             try {
                 const response = await axios.get(`${urlApi}/products`);
-                products.value = response.data;
+                products.value = response.data.products;
                 console.log("Lấy dữ liệu thành công!", products.value);
             } catch (error) {
                 console.error("Lỗi khi lấy dữ liệu:", error);

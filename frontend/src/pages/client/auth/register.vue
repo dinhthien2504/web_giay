@@ -88,7 +88,7 @@
                     const response = await axios.post(`${urlApi}/register`, user);
 
                     // Nếu đăng ký thành công
-                    message.value = response.data;
+                    message.value = response.data.message;
                     user.name = '';
                     user.email = '';
                     user.password = '';
