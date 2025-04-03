@@ -8,6 +8,14 @@ use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
+    public function index()
+    {
+        $users = User::all();
+        return response()->json([
+            'users' => $users
+        ]);
+    }
+
     public function changePassword(Request $request)
     {
         // Xác thực dữ liệu đầu vào
@@ -36,4 +44,13 @@ class UserController extends Controller
 
         return response()->json(['message' => 'Đổi mật khẩu thành công!'], 200);
     }
+    
+    public function toggleStatus($id) {
+        $user = User::findOrFail($id);
+        $user->status = $user->status == 1 ? 0 : 1;
+        $user->save();
+    
+        return response()->json(['message' => 'Cập nhật trạng thái thành công!']);
+    }
+    
 }
