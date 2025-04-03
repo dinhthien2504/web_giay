@@ -22,7 +22,7 @@
                     <th scope="row">{{ index + 1 }}</th>
                     <td>{{ pro.name }}</td>
                     <td>{{ pro.category_id }}</td>
-                    <td>{{ (pro.price).toLocaleString() }}đ</td>
+                    <td>{{ Number(pro.price).toLocaleString('vi-VN', { style: 'currency', currency: 'VND' }) }}</td>
                     <td>{{ pro.sell }}</td>
                     <td>{{ pro.stock }}</td>
                     <td>

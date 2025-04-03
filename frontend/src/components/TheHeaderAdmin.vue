@@ -37,7 +37,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="#">Thông tin</a></li>
-                        <li><a class="dropdown-item" @click="logout">Đăng xuất</a></li>
+                        <li><a class="dropdown-item cursor-pointer" @click="logout">Đăng xuất</a></li>
                     </ul>
                 </div>
             </div>

@@ -101,6 +101,7 @@ export default {
       try {
         const response = await axios.get(`${urlApi}/users`);
         users.value = response.data.users;
+        userFilter();
       } catch (error) {
         console.error("Lỗi khi lấy dữ liệu:", error);
       }
@@ -112,7 +113,6 @@ export default {
     };
     onMounted(async () => {
       await getUsers();
-      userFilter();
     });
 
     // Thêm user mới
@@ -140,7 +140,7 @@ export default {
       }
 
       try {
-        await axios.post(`${urlApi}/register`, {
+        const response = await axios.post(`${urlApi}/register`, {
           name: name.value,
           email: email.value,
           password: password.value,
@@ -148,7 +148,7 @@ export default {
         });
 
         message.value = "Thêm người dùng thành công!";
-        getUsers(); // Cập nhật danh sách sau khi thêm
+        getUsers();
         name.value = "";
         email.value = "";
         password.value = "";
