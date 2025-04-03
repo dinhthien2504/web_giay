@@ -39,3 +39,4 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->name('logout');
 
 Route::post('/change-password', [UserController::class, 'changePassword']);
+Route::put('/users/{id}/toggle-status', [UserController::class, 'toggleStatus']);
