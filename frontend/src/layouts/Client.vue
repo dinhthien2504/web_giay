@@ -8,7 +8,7 @@
     </footer>
 </template>
 <script>
-import { inject } from 'vue';
+import { inject, onMounted } from 'vue';
 import TheHeader from '../components/TheHeader.vue';
 import TheFooter from '../components/TheFooter.vue';
 export default {
@@ -16,8 +16,15 @@ export default {
         TheHeader,
         TheFooter
     },
+    emits: ["success-login"],
     setup() {
         const isLogin = inject('isLogin');
+        onMounted(() => {
+            const savedLoginData = localStorage.getItem('user');
+            if (savedLoginData) {
+                isLogin.value = JSON.parse(savedLoginData);
+            }
+        });
         return {
             isLogin
         }
