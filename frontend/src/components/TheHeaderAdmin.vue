@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">ADMIN</a>
+            <router-link to="/admin" class="navbar-brand">ADMIN</router-link>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -10,7 +10,8 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Tài Khoản</a>
+                        <router-link to="/admin/tai-khoan" class="nav-link active" aria-current="page">Tài
+                            Khoản</router-link>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -18,7 +19,10 @@
                             Sản Phẩm
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#">Thêm Sản Phẩm</a></li>
+                            <li>
+                                <router-link class="dropdown-item" to="/admin/san-pham">Hiển Thị Sản Phẩm</router-link>
+                            </li>
+                            <!-- <li><a class="dropdown-item" href="#">Thêm Sản Phẩm</a></li> -->
                             <li><a class="dropdown-item" href="#">Thêm Danh Mục</a></li>
                         </ul>
                     </li>

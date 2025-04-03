@@ -2,13 +2,13 @@
     <header v-if="!$route.meta.hideHeader">
         <TheHeader></TheHeader>
     </header>
-    <router-view @success-login="handleLogin"></router-view>
+    <router-view></router-view>
     <footer v-if="!$route.meta.hideFooter">
         <TheFooter></TheFooter>
     </footer>
 </template>
 <script>
-import { ref, provide, onMounted } from 'vue';
+import { inject } from 'vue';
 import TheHeader from '../components/TheHeader.vue';
 import TheFooter from '../components/TheFooter.vue';
 export default {
@@ -17,22 +17,9 @@ export default {
         TheFooter
     },
     setup() {
-        const isLogin = ref(null);
-        const handleLogin = (data) => {
-            console.log(">>Đã đăng nhập thành công: ", data);
-            isLogin.value = data;
-        }
-        //Nếu trước đã đăng nhập thì lấy lại thông tin
-        onMounted(() => {
-            const savedLoginData = localStorage.getItem('user');
-            if (savedLoginData) {
-                isLogin.value = JSON.parse(savedLoginData);
-            }
-        });
-        provide('isLogin', isLogin);
-
+        const isLogin = inject('isLogin');
         return {
-            handleLogin
+            isLogin
         }
     }
 }

@@ -40,11 +40,8 @@
 </template>
 
 <script>
-// import { inject } from 'vue';
 import axios from 'axios';
 import { urlApi } from '../../../components/store';
-// import { useRouter } from 'vue-router';
-
 export default {
     emits: ['success-login'], // Khai báo sự kiện emit
     data() {
