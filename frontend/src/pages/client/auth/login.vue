@@ -77,6 +77,11 @@ export default {
             try {
                 const response = await axios.post(`${urlApi}/login`, this.user);
                 if (response.status === 200) {
+                    //Kiểm tra trạng thái tài khoản
+                    if (response.data.user.status == 1) {
+                        this.message = "Tài khoản bạn đã bị khóa!";
+                        return;
+                    }
                     localStorage.setItem('auth_token', response.data.token);
                     localStorage.setItem('user', JSON.stringify(response.data.user));
 
