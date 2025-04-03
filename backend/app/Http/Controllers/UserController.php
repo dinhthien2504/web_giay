@@ -8,6 +8,13 @@ use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
+    public function index()
+    {
+        $users = User::all();
+        return response()->json([
+            'users' => $users
+        ]);
+    }
     public function changePassword(Request $request)
     {
         // Xác thực dữ liệu đầu vào
