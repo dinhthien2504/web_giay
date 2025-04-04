@@ -84,11 +84,9 @@ export default {
                     }
                     localStorage.setItem('auth_token', response.data.token);
                     localStorage.setItem('user', JSON.stringify(response.data.user));
-
+                    this.$emit('success-login', response.data.user);
                     const role = response.data.role === 0 ? 'home' : 'admin-dashboard';
                     this.$router.push({ name: role });
-
-                    this.$emit('success-login', response.data.user);
                 }
             } catch (error) {
                 if (error.response) {

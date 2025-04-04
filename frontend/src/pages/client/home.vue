@@ -281,3 +281,26 @@
     </section>
     <!-- End Product Sell -->
 </template>
+<script>
+import { ref } from 'vue'
+import axios from 'axios'
+export default {
+    emits: ['success-login'],
+    setup() {
+        const products = ref([]);
+        const proNews = ref([]);
+        const proSell = ref([]);
+        // const getPros = async () => {
+        //     const response = await axios.get(`${urlApi}/products`);
+        //     if (response.data.status == 200) {
+        //         //Lấy sản phẩm mới nhất
+        //         // proNews.value = response.data.products.filter((pro) =>);
+        //         //Lấy sản phẩm bán chạy
+        //     }
+        // }
+        return {
+            proNews, proSell
+        }
+    }
+}
+</script>

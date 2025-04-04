@@ -84,6 +84,7 @@ import { onMounted, ref, inject } from "vue";
 import { urlApi } from "../../../components/store";
 
 export default {
+  emits: ["success-login"],
   setup() {
     const isLogin = inject('isLogin');
     console.log(isLogin);

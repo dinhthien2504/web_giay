@@ -107,6 +107,7 @@ import { onMounted, ref } from 'vue';
 import { urlApi } from '../../../components/store';
 
 export default {
+    emits: ["success-login"],
     setup() {
         const message_success = ref('');
         const products = ref([]);
