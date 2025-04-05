@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 class ProductController extends Controller
@@ -77,10 +78,31 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Product $product)
+    public function show($id)
     {
-        //
+        try {
+            $product = Product::find($id);
+
+            if (!$product) {
+                return response()->json([
+                    'status' => 404,
+                    'message' => 'Sản phẩm không tồn tại'
+                ], 404);
+            }
+
+            return response()->json([
+                'status' => 200,
+                'product' => $product
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                'status' => 500,
+                'message' => 'Đã xảy ra lỗi server.',
+                'error' => $e->getMessage() // có thể bỏ dòng này khi lên production
+            ], 500);
+        }
     }
+
 
     /**
      * Show the form for editing the specified resource.

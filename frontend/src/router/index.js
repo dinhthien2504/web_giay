@@ -20,6 +20,7 @@ const routes = [
                 name: 'home',
                 component: () => import('../pages/client/home.vue')
             },
+            //user
             {
                 path: 'dang-nhap',
                 name: 'login',
@@ -34,7 +35,19 @@ const routes = [
                 path: 'doi-mk',
                 name: 'forgot-pass',
                 component: () => import('../pages/client/auth/change-pass.vue')
-            }
+            },
+            //product
+            {
+                path: 'chi-tiet/:id',
+                name: 'product-detail',
+                component: () => import('../pages/client/products/product-detail.vue')
+            },
+            // cart
+            {
+                path: 'gio-hang',
+                name: 'cart',
+                component: () => import('../pages/client/carts/index.vue')
+            },
         ]
     },
     ...adminRoutes

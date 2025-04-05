@@ -14,7 +14,7 @@
                             chủ</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link to="/san-pham" class="nav-link text-light active" aria-current="page">Sản
+                        <router-link to="#" class="nav-link text-light active" aria-current="page">Sản
                             phẩm</router-link>
                     </li>
 

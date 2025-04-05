@@ -34,110 +34,24 @@
                 <h3 class="fs-5 m-0 text-center text-primary">SẢN PHẨM MỚI</h3>
             </div>
             <div class="row g-2">
-                <div class="col-6 col-lg-2 col-md-3 col-sm-4">
-                    <div class="card cursor-pointer">
-                        <img class="card-img-top" src="/img/shoe1.jpg" alt="Shoe 1" style="width:100%">
+                <!-- Pro Item -->
+                <div v-for="pro in proNews" class="col-6 col-lg-2 col-md-3 col-sm-4">
+                    <router-link class="card cursor-pointer text-decoration-none" :to="`/chi-tiet/${pro.id}`">
+                        <img class="card-img-top w-100" style="height: 200px; object-fit: cover;"
+                            :src="`/img/${pro.image}`" :alt="pro.name">
                         <div class="card-body p-1">
-                            <h4 class="product__title">Giày thương hiệu chính hãng nha mấy bà bla bla bla</h4>
+                            <h4 class="product__title">{{ pro.name }}</h4>
                             <div class="d-flex align-items-center justify-content-between my-2">
-                                <p class="m-0 fs-16 text-color fw-bold">100.000 đ</p>
-                                <span class="fs-12">Đã bán: 10</span>
+                                <p class="m-0 fs-16 text-color fw-bold">{{ Number(pro.price).toLocaleString('vi-VN', {
+                                    style: 'currency', currency: 'VND'
+                                }) }}</p>
+                                <span class="fs-12">Đã bán: {{ pro.sell }}</span>
                             </div>
                             <router-link to="" class="btn btn-sm btn-primary">Mua ngay</router-link>
                         </div>
-                    </div>
+                    </router-link>
                 </div>
-                <div class="col-6 col-lg-2 col-md-3 col-sm-4">
-                    <div class="card cursor-pointer">
-                        <img class="card-img-top" src="/img/shoe1.jpg" alt="Shoe 1" style="width:100%">
-                        <div class="card-body p-1">
-                            <h4 class="product__title">Giày thương hiệu chính hãng nha mấy bà bla bla bla</h4>
-                            <div class="d-flex align-items-center justify-content-between my-2">
-                                <p class="m-0 fs-16 text-color fw-bold">100.000 đ</p>
-                                <span class="fs-12">Đã bán: 10</span>
-                            </div>
-                            <router-link to="" class="btn btn-sm btn-primary">Mua ngay</router-link>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-2 col-md-3 col-sm-4">
-                    <div class="card cursor-pointer">
-                        <img class="card-img-top" src="/img/shoe1.jpg" alt="Shoe 1" style="width:100%">
-                        <div class="card-body p-1">
-                            <h4 class="product__title">Giày thương hiệu chính hãng nha mấy bà bla bla bla</h4>
-                            <div class="d-flex align-items-center justify-content-between my-2">
-                                <p class="m-0 fs-16 text-color fw-bold">100.000 đ</p>
-                                <span class="fs-12">Đã bán: 10</span>
-                            </div>
-                            <router-link to="" class="btn btn-sm btn-primary">Mua ngay</router-link>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-2 col-md-3 col-sm-4">
-                    <div class="card cursor-pointer">
-                        <img class="card-img-top" src="/img/shoe1.jpg" alt="Shoe 1" style="width:100%">
-                        <div class="card-body p-1">
-                            <h4 class="product__title">Giày thương hiệu chính hãng nha mấy bà bla bla bla</h4>
-                            <div class="d-flex align-items-center justify-content-between my-2">
-                                <p class="m-0 fs-16 text-color fw-bold">100.000 đ</p>
-                                <span class="fs-12">Đã bán: 10</span>
-                            </div>
-                            <router-link to="" class="btn btn-sm btn-primary">Mua ngay</router-link>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-2 col-md-3 col-sm-4">
-                    <div class="card cursor-pointer">
-                        <img class="card-img-top" src="/img/shoe1.jpg" alt="Shoe 1" style="width:100%">
-                        <div class="card-body p-1">
-                            <h4 class="product__title">Giày thương hiệu chính hãng nha mấy bà bla bla bla</h4>
-                            <div class="d-flex align-items-center justify-content-between my-2">
-                                <p class="m-0 fs-16 text-color fw-bold">100.000 đ</p>
-                                <span class="fs-12">Đã bán: 10</span>
-                            </div>
-                            <router-link to="" class="btn btn-sm btn-primary">Mua ngay</router-link>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-2 col-md-3 col-sm-4">
-                    <div class="card cursor-pointer">
-                        <img class="card-img-top" src="/img/shoe1.jpg" alt="Shoe 1" style="width:100%">
-                        <div class="card-body p-1">
-                            <h4 class="product__title">Giày thương hiệu chính hãng nha mấy bà bla bla bla</h4>
-                            <div class="d-flex align-items-center justify-content-between my-2">
-                                <p class="m-0 fs-16 text-color fw-bold">100.000 đ</p>
-                                <span class="fs-12">Đã bán: 10</span>
-                            </div>
-                            <router-link to="" class="btn btn-sm btn-primary">Mua ngay</router-link>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-2 col-md-3 col-sm-4">
-                    <div class="card cursor-pointer">
-                        <img class="card-img-top" src="/img/shoe1.jpg" alt="Shoe 1" style="width:100%">
-                        <div class="card-body p-1">
-                            <h4 class="product__title">Giày thương hiệu chính hãng nha mấy bà bla bla bla</h4>
-                            <div class="d-flex align-items-center justify-content-between my-2">
-                                <p class="m-0 fs-16 text-color fw-bold">100.000 đ</p>
-                                <span class="fs-12">Đã bán: 10</span>
-                            </div>
-                            <router-link to="" class="btn btn-sm btn-primary">Mua ngay</router-link>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-2 col-md-3 col-sm-4">
-                    <div class="card cursor-pointer">
-                        <img class="card-img-top" src="/img/shoe1.jpg" alt="Shoe 1" style="width:100%">
-                        <div class="card-body p-1">
-                            <h4 class="product__title">Giày thương hiệu chính hãng nha mấy bà bla bla bla</h4>
-                            <div class="d-flex align-items-center justify-content-between my-2">
-                                <p class="m-0 fs-16 text-color fw-bold">100.000 đ</p>
-                                <span class="fs-12">Đã bán: 10</span>
-                            </div>
-                            <router-link to="" class="btn btn-sm btn-primary">Mua ngay</router-link>
-                        </div>
-                    </div>
-                </div>
+                <!-- End Pro Item -->
             </div>
         </div>
     </section>
@@ -172,117 +86,32 @@
                 <h3 class="fs-5 m-0 text-center text-primary">SẢN PHẨM BÁN CHẠY</h3>
             </div>
             <div class="row g-2">
-                <div class="col-6 col-lg-2 col-md-3 col-sm-4">
-                    <div class="card cursor-pointer">
-                        <img class="card-img-top" src="/img/shoe1.jpg" alt="Shoe 1" style="width:100%">
+                <!-- Pro Item -->
+                <div v-for="pro in proSell" class="col-6 col-lg-2 col-md-3 col-sm-4">
+                    <router-link class="card cursor-pointer text-decoration-none" :to="`/chi-tiet/${pro.id}`">
+                        <img class="card-img-top w-100" style="height: 200px; object-fit: cover;"
+                            :src="`/img/${pro.image}`" :alt="pro.name">
                         <div class="card-body p-1">
-                            <h4 class="product__title">Giày thương hiệu chính hãng nha mấy bà bla bla bla</h4>
+                            <h4 class="product__title">{{ pro.name }}</h4>
                             <div class="d-flex align-items-center justify-content-between my-2">
-                                <p class="m-0 fs-16 text-color fw-bold">100.000 đ</p>
-                                <span class="fs-12">Đã bán: 10</span>
+                                <p class="m-0 fs-16 text-color fw-bold">{{ Number(pro.price).toLocaleString('vi-VN', {
+                                    style: 'currency', currency: 'VND'
+                                }) }}</p>
+                                <span class="fs-12">Đã bán: {{ pro.sell }}</span>
                             </div>
                             <router-link to="" class="btn btn-sm btn-primary">Mua ngay</router-link>
                         </div>
-                    </div>
+                    </router-link>
                 </div>
-                <div class="col-6 col-lg-2 col-md-3 col-sm-4">
-                    <div class="card cursor-pointer">
-                        <img class="card-img-top" src="/img/shoe1.jpg" alt="Shoe 1" style="width:100%">
-                        <div class="card-body p-1">
-                            <h4 class="product__title">Giày thương hiệu chính hãng nha mấy bà bla bla bla</h4>
-                            <div class="d-flex align-items-center justify-content-between my-2">
-                                <p class="m-0 fs-16 text-color fw-bold">100.000 đ</p>
-                                <span class="fs-12">Đã bán: 10</span>
-                            </div>
-                            <router-link to="" class="btn btn-sm btn-primary">Mua ngay</router-link>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-2 col-md-3 col-sm-4">
-                    <div class="card cursor-pointer">
-                        <img class="card-img-top" src="/img/shoe1.jpg" alt="Shoe 1" style="width:100%">
-                        <div class="card-body p-1">
-                            <h4 class="product__title">Giày thương hiệu chính hãng nha mấy bà bla bla bla</h4>
-                            <div class="d-flex align-items-center justify-content-between my-2">
-                                <p class="m-0 fs-16 text-color fw-bold">100.000 đ</p>
-                                <span class="fs-12">Đã bán: 10</span>
-                            </div>
-                            <router-link to="" class="btn btn-sm btn-primary">Mua ngay</router-link>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-2 col-md-3 col-sm-4">
-                    <div class="card cursor-pointer">
-                        <img class="card-img-top" src="/img/shoe1.jpg" alt="Shoe 1" style="width:100%">
-                        <div class="card-body p-1">
-                            <h4 class="product__title">Giày thương hiệu chính hãng nha mấy bà bla bla bla</h4>
-                            <div class="d-flex align-items-center justify-content-between my-2">
-                                <p class="m-0 fs-16 text-color fw-bold">100.000 đ</p>
-                                <span class="fs-12">Đã bán: 10</span>
-                            </div>
-                            <router-link to="" class="btn btn-sm btn-primary">Mua ngay</router-link>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-2 col-md-3 col-sm-4">
-                    <div class="card cursor-pointer">
-                        <img class="card-img-top" src="/img/shoe1.jpg" alt="Shoe 1" style="width:100%">
-                        <div class="card-body p-1">
-                            <h4 class="product__title">Giày thương hiệu chính hãng nha mấy bà bla bla bla</h4>
-                            <div class="d-flex align-items-center justify-content-between my-2">
-                                <p class="m-0 fs-16 text-color fw-bold">100.000 đ</p>
-                                <span class="fs-12">Đã bán: 10</span>
-                            </div>
-                            <router-link to="" class="btn btn-sm btn-primary">Mua ngay</router-link>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-2 col-md-3 col-sm-4">
-                    <div class="card cursor-pointer">
-                        <img class="card-img-top" src="/img/shoe1.jpg" alt="Shoe 1" style="width:100%">
-                        <div class="card-body p-1">
-                            <h4 class="product__title">Giày thương hiệu chính hãng nha mấy bà bla bla bla</h4>
-                            <div class="d-flex align-items-center justify-content-between my-2">
-                                <p class="m-0 fs-16 text-color fw-bold">100.000 đ</p>
-                                <span class="fs-12">Đã bán: 10</span>
-                            </div>
-                            <router-link to="" class="btn btn-sm btn-primary">Mua ngay</router-link>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-2 col-md-3 col-sm-4">
-                    <div class="card cursor-pointer">
-                        <img class="card-img-top" src="/img/shoe1.jpg" alt="Shoe 1" style="width:100%">
-                        <div class="card-body p-1">
-                            <h4 class="product__title">Giày thương hiệu chính hãng nha mấy bà bla bla bla</h4>
-                            <div class="d-flex align-items-center justify-content-between my-2">
-                                <p class="m-0 fs-16 text-color fw-bold">100.000 đ</p>
-                                <span class="fs-12">Đã bán: 10</span>
-                            </div>
-                            <router-link to="" class="btn btn-sm btn-primary">Mua ngay</router-link>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6 col-lg-2 col-md-3 col-sm-4">
-                    <div class="card cursor-pointer">
-                        <img class="card-img-top" src="/img/shoe1.jpg" alt="Shoe 1" style="width:100%">
-                        <div class="card-body p-1">
-                            <h4 class="product__title">Giày thương hiệu chính hãng nha mấy bà bla bla bla</h4>
-                            <div class="d-flex align-items-center justify-content-between my-2">
-                                <p class="m-0 fs-16 text-color fw-bold">100.000 đ</p>
-                                <span class="fs-12">Đã bán: 10</span>
-                            </div>
-                            <router-link to="" class="btn btn-sm btn-primary">Mua ngay</router-link>
-                        </div>
-                    </div>
-                </div>
+                <!-- End Pro Item -->
             </div>
         </div>
     </section>
     <!-- End Product Sell -->
 </template>
 <script>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
+import { urlApi } from '../../components/store';
 import axios from 'axios'
 export default {
     emits: ['success-login'],
@@ -290,14 +119,24 @@ export default {
         const products = ref([]);
         const proNews = ref([]);
         const proSell = ref([]);
-        // const getPros = async () => {
-        //     const response = await axios.get(`${urlApi}/products`);
-        //     if (response.data.status == 200) {
-        //         //Lấy sản phẩm mới nhất
-        //         // proNews.value = response.data.products.filter((pro) =>);
-        //         //Lấy sản phẩm bán chạy
-        //     }
-        // }
+        const getPros = async () => {
+            const response = await axios.get(`${urlApi}/products`);
+            if (response.status == 200) {
+                products.value = response.data.products;
+                //Lấy sản phẩm mới nhất
+                proNews.value = products.value
+                    .sort((a, b) => b.id - a.id)
+                    .slice(0, 10);
+                // Lấy sản phẩm bán chạy
+                proSell.value = products.value
+                    .filter((pro) => pro.sell > 0)//Lọc nếu lượt bán lớn hơn 0
+                    .sort((a, b) => b.sell - a.sell)//Lọc theo lượt bán nhiều nhất
+                    .slice(0, 6);//Lấy 6 sản phẩm đầu tiên
+            }
+        }
+        onMounted(() => {
+            getPros();
+        })
         return {
             proNews, proSell
         }
