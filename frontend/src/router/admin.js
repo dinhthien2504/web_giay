@@ -17,6 +17,11 @@ const admin = [
                 path: 'san-pham',
                 name: 'admin-product',
                 component: () => import('../pages/admin/products/index.vue')
+            },
+            {
+                path: 'danh-muc',
+                name: 'admin-category',
+                component: () => import('../pages/admin/categories/index.vue')
             }
         ]
     }

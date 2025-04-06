@@ -13,18 +13,13 @@
                         <router-link to="/admin/tai-khoan" class="nav-link active" aria-current="page">Tài
                             Khoản</router-link>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Sản Phẩm
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <router-link class="dropdown-item" to="/admin/san-pham">Hiển Thị Sản Phẩm</router-link>
-                            </li>
-                            <!-- <li><a class="dropdown-item" href="#">Thêm Sản Phẩm</a></li> -->
-                            <li><a class="dropdown-item" href="#">Thêm Danh Mục</a></li>
-                        </ul>
+                    <li class="nav-item">
+                        <router-link to="/admin/san-pham" class="nav-link active" aria-current="page">Sản
+                            Phẩm</router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link to="/admin/danh-muc" class="nav-link active" aria-current="page">Danh
+                            Mục</router-link>
                     </li>
                 </ul>
                 <div v-if="isLogin" class="nav-item dropdown me-3">

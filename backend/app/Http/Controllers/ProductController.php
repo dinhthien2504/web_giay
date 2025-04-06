@@ -115,10 +115,51 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProductRequest $request, Product $product)
+    public function update(Request $request, $id)
     {
-        //
+        // Kiểm tra dữ liệu gửi từ frontend
+        dd($request->all()); // Debug dữ liệu gửi từ frontend
+        dd($request->file('image')); // Debug file ảnh nếu có
+
+        // Tìm sản phẩm theo ID
+        $product = Product::findOrFail($id);
+
+        // Validation
+        $validatedData = $request->only(['name', 'price', 'stock', 'category_id', 'description']);
+
+        // Kiểm tra ảnh nếu có
+        if ($request->hasFile('image')) {
+            // Xóa ảnh cũ (nếu có)
+            $oldPath = base_path('../frontend/public/img/' . $product->image);
+            if ($product->image && file_exists($oldPath)) {
+                unlink($oldPath);
+            }
+
+            // Lấy ảnh mới và lưu vào thư mục frontend/public/img
+            $image = $request->file('image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $frontendPath = base_path('../frontend/public/img/' . $imageName);
+
+            // Di chuyển ảnh vào thư mục frontend
+            $image->move(dirname($frontendPath), basename($frontendPath));
+
+            // Cập nhật tên ảnh trong cơ sở dữ liệu
+            $product->image = $imageName;
+        }
+
+        // Cập nhật sản phẩm với các dữ liệu đã được xác thực và xử lý ảnh nếu có
+        $product->update($validatedData);
+
+        // Trả về phản hồi thành công
+        return response()->json([
+            'message' => 'Cập nhật sản phẩm thành công!',
+            'product' => $product
+        ]);
     }
+
+
+
+
 
     /**
      * Remove the specified resource from storage.
